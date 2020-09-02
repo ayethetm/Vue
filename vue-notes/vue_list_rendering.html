@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue Js Learning - List Rendering</title>
+	<script type="text/javascript" src="vue.min.js"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- Using Array -->
+		<ul>
+		  <li v-for="item in items">
+		    {{ item.message }}
+		  </li>
+		</ul>
+
+		<!-- Using the current item => index -->
+		<!-- Using of instead in -->
+		<ul>
+			<li v-for="(item, index) of items">
+		    {{ index }} - {{ item.message }}
+		  </li>
+		</ul>
+
+		<!-- Maintaining State with key -->
+		<div v-for="item in items" v-bind:key="item.id">
+		  {{item.message}}
+		</div>
+
+		<!-- Testing With An Object -->
+		<ul>
+			<li v-for="value in object">
+		    {{ value }}
+		  </li>
+		</ul>
+	</div>
+
+	<script type="text/javascript">
+		// create new object
+		var data = { 
+			items: [
+	      { message: 'Foo' },
+	      { message: 'Bar' }
+	    ],
+	    object: {
+	      title: 'How to do lists in Vue',
+	      author: 'Jane Doe',
+	      publishedAt: '2016-04-10'
+	    }
+		}
+
+		// create new vue instance
+		var vm = new Vue({
+			el: '#app',
+			data: data
+		})
+	</script>
+</body>
+</html>

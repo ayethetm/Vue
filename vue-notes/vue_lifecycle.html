@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue Js Learning - Lifecycle</title>
+	<script type="text/javascript" src="vue.min.js"></script>
+</head>
+<body>
+	<div id="app">
+		{{a}}
+		{{b.name}}
+	</div>
+
+	<script type="text/javascript">
+		// create new object
+		var data = { 
+			a: 1,
+			b: {
+				name:'mgmg'
+			}
+		}
+
+		// create new vue instance (vm)
+		var vm = new Vue({
+			el: '#app',
+			data: data,
+			// lifecycle hooks
+			destroyed: function () {
+		    // `this` points to the vm instance
+		    console.log('a is: in destroyed ' + this.a)
+		  },
+		  updated: function () {
+		    // `this` points to the vm instance
+		    console.log('a is: in updated ' + this.a)
+		  },
+			mounted: function () {
+		    // `this` points to the vm instance
+		    //html DOM connect
+		    console.log('a is: in mounted ' + this.a)
+		  },
+			created: function () {
+		    // `this` points to the vm instance
+		    console.log('a is: in created ' + this.a)
+		  }
+		})
+	</script>
+</body>
+</html>

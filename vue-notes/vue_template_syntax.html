@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue Js Learning - Template Syntax</title>
+	<script type="text/javascript" src="vue.min.js"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- not update on data change -->
+		<span v-once>This will never change: {{ msg }}</span>
+
+		<!-- double curly braces -->
+		{{a+1}}
+		{{b.name}}
+
+		<!-- Raw HTML -->
+		<p>Using mustaches: {{ rawHtml }}</p>
+		<p>Using v-html directive: <span v-html="rawHtml"></span></p>
+
+		<!-- Attributes -->
+		<div v-bind:id="dynamicId"></div>
+
+		<!-- isButtonDisabled => (null, undefined, or false) -->
+		<button v-bind:disabled="isButtonDisabled">Button</button>
+
+		<!-- Expressions -->
+		{{ a + 1 }}
+
+		{{ ok ? 'YES' : 'NO' }}
+
+		{{ msg.split('').reverse().join('') }}
+
+		<div v-bind:id="'list-' + dynamicId"></div>
+
+		<!-- Directives -->
+		<p v-if="seen">Now you see me</p>
+
+		<!-- Arguments -->
+		<a v-bind:href="url"> To Google </a>
+
+		<a v-on:click="doSomething">Do Something</a>
+	</div>
+
+	<script type="text/javascript">
+		// create new object
+		var data = {
+			url: 'http://google.com',
+			seen: false,
+			ok:1,
+			dynamicId:2,
+			isButtonDisabled: false,
+			rawHtml: '<span style="color:red">This should be red.</span>',
+			msg: 'Hello Vue',
+			a: 1,
+			b: {
+				name:'mgmg'
+			}
+		}
+
+		// create new vue instance (vm)
+		var vm = new Vue({
+			el: '#app',
+			data: data,
+			// methods
+		  methods: {
+			  doSomething: function () {
+			    console.log('Do One!');
+			  }
+			}
+		})
+	</script>
+</body>
+</html>

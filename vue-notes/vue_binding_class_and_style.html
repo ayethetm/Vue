@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue Js Learning - Bindings Class and Style</title>
+	<script type="text/javascript" src="vue.min.js"></script>
+</head>
+<body>
+	<div id="app">
+
+		<!-- Object Syntax -->
+		<div
+		  class="static"
+		  v-bind:class="{ active: isActive, 'text-danger': hasError }"
+		>Individual Variable</div>
+
+		<!-- Entire Object -->
+		<div v-bind:class="classObject">Entire Object</div>
+
+		<!-- Array Syntax -->
+		<div v-bind:class="[activeClass, errorClass]">Array Syntax</div>
+
+		<!-- Expression on bind class -->
+		<div v-bind:class="[isActive ? errorClass : '', activeClass]">Expression</div>
+
+		<!-- short term -->
+		
+	</div>
+
+	<script type="text/javascript">
+		// create new object
+		var data = { 
+			isActive: true,
+			hasError: false,
+
+			// classObject: {
+			//     active: true,
+			//     'text-danger': true
+			// },
+			
+			error: true,
+			activeClass: 'active',
+  		errorClass: 'text-danger'
+		}
+
+		// create new vue instance
+		var vm = new Vue({
+			el: '#app',
+			data: data,
+			computed: {
+			  classObject: function () {
+			    return {
+			      active: this.isActive && this.error,
+			      'text-danger': this.error && this.error.type !== 'fatal'
+			    }
+			  }
+			}
+		})
+	</script>
+
+	<style type="text/css">
+		.text-danger{
+			color: red;
+		}
+	</style>
+</body>
+</html>

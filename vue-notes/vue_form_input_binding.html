@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue Js Learning - Form Input Bindings</title>
+	<script type="text/javascript" src="vue.min.js"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- Two Way Data Binding -->
+	  <input v-model.trim="message" placeholder="edit me">
+		<p>Message is: {{ message }}</p>
+
+		<!-- Data Base Bindings -->
+		<input type="checkbox" id="checkbox" v-model="checked">
+		<label for="checkbox">{{ checked }}</label>
+
+		<!-- Binding Checkboxs -->
+		<div>
+			<input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+		  <label for="jack">Jack</label>
+		  <input type="checkbox" id="john" value="John" v-model="checkedNames">
+		  <label for="john">John</label>
+		  <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+		  <label for="mike">Mike</label>
+		  <br>
+		  <span>Checked names: {{ checkedNames }}</span>
+		</div>
+	  <!-- Radio -->
+	  <div>
+	  	<input type="radio" id="one" value="One" v-model="picked">
+			<label for="one">One</label>
+			<br>
+			<input type="radio" id="two" value="Two" v-model="picked">
+			<label for="two">Two</label>
+			<br>
+			<span>Picked: {{ picked }}</span>
+	  </div>
+	  
+	  <!-- Type Number -->
+	  <input v-model.number="age" type="number">
+	</div>
+
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				age: 0,
+				message: '',
+				checked: false,
+				picked: '',
+				checkedNames: []
+			}
+		})
+	</script>
+</body>
+</html>

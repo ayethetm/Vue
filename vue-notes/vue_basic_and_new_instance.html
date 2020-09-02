@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue Js Learning - New Instance</title>
+	<script type="text/javascript" src="vue.min.js"></script>
+</head>
+<body>
+	<div id="app">
+		{{a}}
+		{{b.name}}
+	</div>
+
+	<script type="text/javascript">
+		// create new object
+		var data = { 
+			a: 1,
+			b: {
+				name:'mgmg'
+			}
+		}
+
+		// freeze -> cann't modified data on both console
+		Object.freeze(data)
+
+		// create new vue instance
+		var vm = new Vue({
+
+			//el is for binding DOM
+			el: '#app',
+			data: data
+		})
+	</script>
+</body>
+</html>

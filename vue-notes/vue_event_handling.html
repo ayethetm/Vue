@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue Js Learning - Event Handling</title>
+	<script type="text/javascript" src="vue.min.js"></script>
+</head>
+<body>
+	<div id="app">
+	  <!-- `greet` is the name of a method defined below -->
+	  <button v-on:click="greet">Greet</button>
+
+	  <button v-on:click="warn('Form cannot be submitted yet.', $event)">
+		  Submit
+		</button>
+	</div>
+
+	<script type="text/javascript">
+		// create new vue instance
+		var vm = new Vue({
+			el: '#app',
+			data: {
+		    name: 'Vue.js'
+		  },
+		  // define methods under the `methods` object
+		  methods: {
+		    greet: function (event) {
+		      // `this` inside methods points to the Vue instance
+		      alert('Hello ' + this.name + '!')
+		      // `event` is the native DOM event
+		      if (event) {
+		        alert(event.target.tagName)
+		      }
+		    },
+		    warn: function (message, event) {
+			    // now we have access to the native event
+			    if (event) event.preventDefault()
+			    alert(message)
+			  }
+		  }
+		})
+	</script>
+</body>
+</html>

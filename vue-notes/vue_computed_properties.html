@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue Js Learning - Computed Properties</title>
+	<script type="text/javascript" src="vue.min.js"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- In-template expression -->
+		{{ message.split('').reverse().join('') }}
+
+		<p>Original message: "{{ message }}"</p>
+  	<p>Computed reversed message: "{{ reversedMessage }}"</p>
+
+  	<!-- Using Method instead of computed -->
+  	<p>Reversed message: "{{ reverseMessage() }}"</p>
+
+  	<!--  computed result without having to run the function again. (vs Methods) --> 
+  	{{ now }}
+	</div>
+
+	<script type="text/javascript">
+		// create new object
+		var data = { 
+			message: 'Hello Vue'
+		}
+
+		// create new vue instance
+		var vm = new Vue({
+			el: '#app',
+			data: data,
+			computed: {
+		    // a computed getter and run computed value and save as cache
+		    reversedMessage: function () {
+		      // `this` points to the vm instance
+		      return this.message.split('').reverse().join('')
+		    },
+
+		    now: function () {
+			    return Date.now()
+			  }
+
+		  },
+		  methods: {
+			  reverseMessage: function () {
+			    return this.message.split('').reverse().join('')
+			  }
+			}
+		})
+	</script>
+</body>
+</html>
