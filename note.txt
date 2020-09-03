@@ -1,0 +1,30 @@
+1- npm install -g @vue/cli => if errors, npm cache clean --force
+2-vue
+3-vue create cli
+4-cd cli
+5-npm run serve
+6-
+
+
+
+in-browser-> does not easy css connect
+frontend-> can easy creating pj with api
+
+
+---------------------------------
+
+1- node_modules (added required packages )
+2-public (include required asset files-entry point to run)
+3-src(my application)
+4-babel (like workbench in laravel)
+5-package-lock.json(log file to run package.json )
+
+
+=>main.js
+	-new Vue (create instance)
+	-App.vue
+
+=>Component (.vue)
+	-template (html file)
+	-script(js)
+	-style(css)
