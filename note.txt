@@ -59,3 +59,13 @@ After installing cli, the following folders are found.
 
 -using API
 	-npm install axios
+
+
+
+================
+9.8.2020
+---------
+-vuex -> state management pattern and library by vue
+
+lower-upper->events
+upper-lower->props

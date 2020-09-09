@@ -1,10 +1,14 @@
 <template>
-	<div class="container-fluid my-5">
-		<div class="row">
-			<div class="col-md-3" v-for="(item,index) in items" :key="index">
-				<ItemCard :item="item"></ItemCard>
+	<div class="container">
+
+	<img src="@/assets/banner4.jpg" class="img-fluid">
+
+			<div class="row mt-5">
+				<div class="col-md-3" v-for="(item,index) in items" :key="index">
+					<ItemCard :item="item"></ItemCard>
+				</div>
 			</div>
-		</div>
+
 	</div>
 </template>
 <script type="text/javascript">
@@ -23,16 +27,14 @@ import ItemService from '@/services/ItemService.js'
 			// 	{id:1,text:'Learn Javascript'},
 			// 	{id:2, text: 'Learn Vue'},
 			// 	{ id:3, text: 'Build something awesome'
-			// 	}
+			// 	
+		// }
 			return{
 				items: []
 			}
 			},
-			mounted(){
-				this.getItems()
-			},
-			methods:{
-				getItems(){
+			created(){
+				
 					ItemService.getItems().then(res=> {
 						this.items= res.data.items
 					}).catch(err=> {
@@ -40,7 +42,7 @@ import ItemService from '@/services/ItemService.js'
 					})
 				}
 			}
-		}
+		
 
 </script>
 
