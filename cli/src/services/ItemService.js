@@ -32,8 +32,8 @@ export default{
 	login(user){
 		return axios.post('http://localhost:8000/oauth/token',user)
 	},
-	register(data){
-		return apiClient.post('/register',data);
+	register(user){
+		return apiClient.post('/register',user);
 	},
 	
 
