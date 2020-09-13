@@ -4,22 +4,26 @@
   <div id="app">
    <navbar></navbar>
     <router-view></router-view>
-  </div>
+  
+    <footer></footer>
+ </div>
 </template>
 
 <script>
 
 import navbar from './components/navbar.vue'
+
+
 export default {
   components:{
     navbar
-  },
+ },
   name: 'App',
   mounted(){
     this.$router.push('/items')
   },
   data(){
-    return{
+    return {
 
     }
   }

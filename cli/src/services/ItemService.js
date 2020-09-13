@@ -1,11 +1,13 @@
 import axios from 'axios'
 
+let token = localStorage.getItem('token')
 const apiClient  = axios.create({
-	baseURL: 'http://osapi.thetpainghtut.com/api/v1',
+	baseURL: 'http://localhost:8000/api/v1',
 	withCredentials: false,
 	headers:{
 		Accept: 'application/json',
-		'Content-type': 'application/json'
+		'Content-type': 'application/json',
+		Authorization: `Bearer ${token}`
 	}
 })
 
@@ -24,5 +26,16 @@ export default{
  getOrders(){
 		return apiClient.get('/orders')
 	},
+	getOrder(id){
+		return apiClient.get('/orders/'+id)
+	},
+	login(user){
+		return axios.post('http://localhost:8000/oauth/token',user)
+	},
+	register(data){
+		return apiClient.post('/register',data);
+	},
+	
+
 
 }

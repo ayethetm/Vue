@@ -16,7 +16,7 @@
             <div class="col-md-8">
               <div class="card-body text-left">
                 <h5 class="card-title">{{item.item_name}}</h5>
-                <p class="card-text">{{ item.item_desc }} This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text">{{ item.item_desc }} </p>
                 <p>
                   <span class="mr-2"> <b-icon icon="tag-fill" variant="info"></b-icon> {{item.brand.brand_name}}</span>
                   <span> <b-icon icon="tag-fill" variant="dark"></b-icon> {{item.subcategory.subcategory_name}}</span>
@@ -27,7 +27,21 @@
                
                 <input type="number" name="qty" v-model="qty" class="form-control w-25 d-inline-block" min="1">
 
-                <button class="ml-3 btn btn-info" @click="addToCart()">Add To Cart</button>
+
+                <button class="ml-3 btn btn-info" @click="addToCart()">Add To Cart
+
+                <b-icon icon="cart-plus"> 
+                </b-icon>
+
+                </button>
+
+                
+                <router-link :to="{name:'item-list'}">
+                  <button class="ml-3 btn btn-warning">
+                  Back to items
+                  <b-icon icon="skip-backward-fill"></b-icon>
+                  </button>
+                </router-link>
 
               </div>
             </div>

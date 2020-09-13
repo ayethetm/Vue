@@ -13,6 +13,8 @@
           <li class="nav-item pr-3">
             <router-link :to="{name:'item-list'}" class="nav-link mr-2">Items</router-link>
           </li>
+
+          
        <!--    <li class="nav-item active">
             <router-link :to="{name:'item-create'}" class="nav-link mr-2">Item Create</router-link>
           </li> -->
@@ -20,18 +22,36 @@
 
            <li class="nav-item">
             <router-link :to="{name:'cart'}" class="nav-link mr-2">Cart
-              <span v-if="cartCount > 0" class="badge badge-pill badge-danger">
+              <span v-if="cartCount > 0" class="badge badge-pill badge-info">
                 {{ cartCount }}
               </span>
             </router-link>
           </li>
-          <li class="nav-item">
-            <router-link :to="{name:'order'}" class="nav-link mr-2">Orders
-              <span v-if="orderCount > 0" class="badge badge-pill badge-danger">
-                {{ orderCount }}
-              </span>
-            </router-link>
-          </li>
+
+            <span v-if="isLoggedIn" style="display: inherit;">
+            <li class="nav-item">
+               <router-link :to="{name:'order-list'}" class="nav-link mr-2">Orders
+               </router-link>
+            </li>
+            <li class="nav-item">
+               
+              <a @click="logout()" class="nav-link" style="cursor: pointer;">
+                Logout 
+              </a>
+            </li>
+          </span>
+          <span v-else style="display: inherit;">
+            <li class="nav-item">
+              <router-link :to="{name:'register'}" class="nav-link mr-2">Register</router-link>
+            </li>
+
+            <li class="nav-item">
+              <router-link :to="{name:'login'}" class="nav-link mr-2">Login</router-link>
+            </li>
+          </span>
+         <!--  <li class="nav-item">
+           
+          </li> -->
         </ul>
       </div>
     </div>
@@ -39,14 +59,24 @@
 </template>
 <script type="text/javascript">
   export default{
+    methods:{
+      logout(){
+        this.$store.dispatch('logout')
+        this.$router.push('/')
+      }
+    },
     computed: {
       cartCount() {
         this.$store.dispatch('getData')
         return this.$store.state.cart.length
+      },
+      isLoggedIn() { 
+        return this.$store.getters.isLoggedIn
       }
-     
+      
     }
   }
+
 </script>
 <style type="text/css">
   

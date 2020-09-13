@@ -1,11 +1,31 @@
 <template>
 
   
-    <section v-if="orderDone" class="my-3 ">
-     
-      <h2 class="text-success">Your  order is completed successfully!</h2>
-    
-    </section>
+  <section v-if="orderDone" >
+    <div class="container mt-5 bg-white 
+     rounded text-center">
+     <div class="card shadow">
+       <div class="col-md-12 my-3">
+          <b-button variant="success" class="rounded-circle">
+               <b-icon icon="check2-circle" font-scale="2"> 
+                </b-icon>
+              </b-button>
+         <h2 class="text-success">Your order is successfully submitted!</h2>
+         <br>
+
+      <router-link :to="{name: 'item-list'}" >
+        <button class="btn btn-primary mr-3">Buy More </button>
+      </router-link>
+
+      <router-link :to="{name: 'order-list'}" >
+        <button class="btn btn-info">My Order List</button>
+      </router-link>
+
+       </div>
+     </div>
+    </div>
+
+  </section>
     <section v-else>
        <div class="container shadow mt-5 bg-white rounded text-center">
         <div class="row">
@@ -23,7 +43,7 @@
                   <th>Qty</th>
                   <th>Price</th>
                   <th>Subtotal</th>
-                  <th>Remove</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -48,10 +68,7 @@
                     </button>
                   </td>
                 </tr>
-                <tr>
-                  <td colspan="5" class="mr-auto ">Total Price</td>
-                  <td>{{formattingNumber(itemsSubtotal)}} MMK</td>
-                </tr>
+               
               </tbody>
             </table>
 
@@ -62,7 +79,7 @@
             </div>
 
             <p class="my-3 text-right">
-              <router-link :to="{name:'item-list'}"><button class="btn btn-outline-warning btn-sm">
+              <router-link :to="{name:'item-list'}"><button class="btn btn-warning btn-sm">
                 Continue Shopping
               </button></router-link>
             </p>
@@ -92,16 +109,16 @@
               </li>
               <li class="list-group-item">
                 <span class="float-left">Tax ({{ salesTax * 100 }}%)</span>
-                <span class="float-right">{{ formattingNumber(salesTaxApplied | currencydecimal) }} MMK</span>
+                <span class="float-right">{{ formattingNumber(salesTaxApplied ) }} MMK</span>
               </li>
               <li class="list-group-item">
                 <span class="float-left">Total</span>
-                <span class="float-right">{{ formattingNumber(total | currencydecimal) }} MMK</span>
+                <span class="float-right">{{ formattingNumber(total) }} MMK</span>
               </li>
             </ul>
 
             <button
-               
+                enabled="this.selectedShippingOption"
               class="btn btn-lg btn-success my-2" @click="order()">
                 Check out
             </button>
@@ -125,7 +142,7 @@
       return{
       
     
-        totalAmount: 0,
+        totalAmount:0,
         notes: '',
         orderDone: 0,
         selectedShippingOption: '',
@@ -149,7 +166,7 @@
     },
       computed:{
       cart(){
-        // this.$store.dispatch('getData')
+        
         return this.$store.state.cart;
       },
       cartItemsCount() {
@@ -174,11 +191,11 @@
         return '---';
       },
       total() {
-        if (this.selectedShippingOption) {
+        
           return Number(this.subtotal)
                  + Number(this.salesTaxApplied);
-        }
-        return '---';
+        
+        
       },
     },
     methods: {
@@ -192,8 +209,7 @@
         this.$store.dispatch('minusCart',itemId)
       },
       order(){
-        let data = {shop_data: JSON.stringify(this.$store.state.cart),
-                  notes: this.notes};
+        let data = {shop_data: JSON.stringify(this.$store.state.cart),notes: this.notes,totalAmount:this.total};
         ItemService.createOrder(data)
         .then(response => {
           console.log(response)
@@ -208,6 +224,7 @@
       formattingNumber(number) {
         return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
       }
+
     },
     filters: {
       currencydecimal (value) {
